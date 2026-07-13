@@ -1,0 +1,63 @@
+{
+  "_source": "IRS Rev. Proc. 2025-32 (2026 inflation adjustments, reflecting the One Big Beautiful Bill Act, P.L. 119-21), Section 4: .01 Tax Rate Tables, .03 Maximum Capital Gains Rate, .14 Standard Deduction. NIIT (IRC 1411) and Additional Medicare Tax (IRC 3101(b)(2)) thresholds are fixed by statute, not inflation-indexed.",
+  "taxYear": 2026,
+  "standardDeduction": {
+    "mfj": 32200,
+    "single": 16100,
+    "mfs": 16100,
+    "hoh": 24150
+  },
+  "ordinaryBrackets": {
+    "mfj": [
+      { "atLeast": 0, "lessThan": 24800, "base": 0, "rate": 0.10 },
+      { "atLeast": 24800, "lessThan": 100800, "base": 2480, "rate": 0.12 },
+      { "atLeast": 100800, "lessThan": 211400, "base": 11600, "rate": 0.22 },
+      { "atLeast": 211400, "lessThan": 403550, "base": 35932, "rate": 0.24 },
+      { "atLeast": 403550, "lessThan": 512450, "base": 82048, "rate": 0.32 },
+      { "atLeast": 512450, "lessThan": 768700, "base": 116896, "rate": 0.35 },
+      { "atLeast": 768700, "lessThan": null, "base": 206583.50, "rate": 0.37 }
+    ],
+    "single": [
+      { "atLeast": 0, "lessThan": 12400, "base": 0, "rate": 0.10 },
+      { "atLeast": 12400, "lessThan": 50400, "base": 1240, "rate": 0.12 },
+      { "atLeast": 50400, "lessThan": 105700, "base": 5800, "rate": 0.22 },
+      { "atLeast": 105700, "lessThan": 201775, "base": 17966, "rate": 0.24 },
+      { "atLeast": 201775, "lessThan": 256225, "base": 41024, "rate": 0.32 },
+      { "atLeast": 256225, "lessThan": 640600, "base": 58448, "rate": 0.35 },
+      { "atLeast": 640600, "lessThan": null, "base": 192979.25, "rate": 0.37 }
+    ],
+    "mfs": [
+      { "atLeast": 0, "lessThan": 12400, "base": 0, "rate": 0.10 },
+      { "atLeast": 12400, "lessThan": 50400, "base": 1240, "rate": 0.12 },
+      { "atLeast": 50400, "lessThan": 105700, "base": 5800, "rate": 0.22 },
+      { "atLeast": 105700, "lessThan": 201775, "base": 17966, "rate": 0.24 },
+      { "atLeast": 201775, "lessThan": 256225, "base": 41024, "rate": 0.32 },
+      { "atLeast": 256225, "lessThan": 384350, "base": 58448, "rate": 0.35 },
+      { "atLeast": 384350, "lessThan": null, "base": 103291.75, "rate": 0.37 }
+    ],
+    "hoh": [
+      { "atLeast": 0, "lessThan": 17700, "base": 0, "rate": 0.10 },
+      { "atLeast": 17700, "lessThan": 67450, "base": 1770, "rate": 0.12 },
+      { "atLeast": 67450, "lessThan": 105700, "base": 7740, "rate": 0.22 },
+      { "atLeast": 105700, "lessThan": 201750, "base": 16155, "rate": 0.24 },
+      { "atLeast": 201750, "lessThan": 256200, "base": 39207, "rate": 0.32 },
+      { "atLeast": 256200, "lessThan": 640600, "base": 56631, "rate": 0.35 },
+      { "atLeast": 640600, "lessThan": null, "base": 191171, "rate": 0.37 }
+    ]
+  },
+  "ltcgBrackets": {
+    "_note": "Zero-rate and 15%-rate ceilings on TAXABLE INCOME (ordinary + LTCG/qual-div stacked). Above the 15% ceiling, 20% applies.",
+    "mfj": { "zeroRateMax": 98900, "fifteenRateMax": 613700 },
+    "single": { "zeroRateMax": 49450, "fifteenRateMax": 545500 },
+    "mfs": { "zeroRateMax": 49450, "fifteenRateMax": 306850 },
+    "hoh": { "zeroRateMax": 66200, "fifteenRateMax": 579600 }
+  },
+  "niit": {
+    "rate": 0.038,
+    "magiThreshold": { "mfj": 250000, "single": 200000, "mfs": 125000, "hoh": 200000 }
+  },
+  "additionalMedicare": {
+    "rate": 0.009,
+    "wageThreshold": { "mfj": 250000, "single": 200000, "mfs": 125000, "hoh": 200000 }
+  }
+}

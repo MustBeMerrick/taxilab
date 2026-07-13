@@ -1,0 +1,6 @@
+{
+  "_source": "California EDD, 'California Employer's Guide' (DE 44) 2026, page ii ('2026 Payroll Tax Rates, Taxable Wage Limits, and Maximum Benefit Amounts'). Effective Jan 1, 2024, SB 951 removed the SDI taxable wage limit.",
+  "taxYear": 2026,
+  "rate": 0.013,
+  "wageBase": null
+}

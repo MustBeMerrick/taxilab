@@ -154,6 +154,43 @@ tests/              Unit tests
 scripts/            Utility scripts
 ```
 
+## Getting started (development)
+
+```bash
+npm install
+cp .env.example .env
+npx prisma migrate dev
+npm run seed               # creates default earners, a 2026 TaxProfile, one brokerage account
+npm run dev                 # http://localhost:3000
+```
+
+There is no login -- the app has no auth layer. Only run it on a trusted home network / behind your own access control if that matters to you.
+
+Run the tax engine test suite (Layer 2 vectors are checked against real IRS Pub 15-T / CA DE-44 worked examples):
+
+```bash
+npm test
+```
+
+## Deploying to a home server
+
+1. **Build:** `npm ci && npx prisma migrate deploy && npm run build`
+2. **Environment:** copy `.env.example` to `.env` on the server.
+3. **Process manager:** `pm2 start ecosystem.config.js` (see that file for the process config; `pm2 save && pm2 startup` to survive reboots). A `systemd` unit calling `next start` works equally well if you prefer not to use pm2.
+4. **Reverse proxy / HTTPS:** point Caddy or nginx at `localhost:3000`. See `Caddyfile.example` for a minimal Caddy config (automatic Let's Encrypt HTTPS).
+5. **Backups:** `scripts/backup.sh` dumps `data/tax.db` to iCloud Drive and prunes backups older than 30 days. Add it to cron, e.g.:
+   ```
+   0 3 * * * /path/to/taxilab/scripts/backup.sh >> /path/to/taxilab/logs/backup.log 2>&1
+   ```
+   It can also be triggered manually from Settings → Backup in the app.
+6. **PWA on iOS:** open the deployed HTTPS URL in Safari, then Share → Add to Home Screen.
+
+## Tax data updates for future years
+
+`tax-data/2026/*.json` contains the current dataset, sourced directly from IRS Publication 15-T (2026), IRS Rev. Proc. 2025-32, IRS Publication 15 (2026), and the CA EDD "California Withholding Schedules for 2026" (Method B) -- see the `_source` field in each file. CA 540 liability bracket/standard-deduction/exemption-credit figures are derived from the DE-44 withholding tables as the closest verified proxy (flagged `_provisional` in `ca-540-brackets.json`); verify against the official FTB Form 540 booklet before relying on them for real filing decisions.
+
+To add a new tax year, create `tax-data/YYYY/` with the same six files, update `scripts/seed-2026.ts` (or add a year-specific seed script), and re-run the Layer 2 test suite against that year's worked examples before switching the app's default tax year.
+
 ## Disclaimer
 
 TaxiLab is a tax planning and forecasting tool. It does not prepare or file tax returns and should not be considered legal, financial, or tax advice. Always verify important tax decisions against official IRS and California guidance or consult a qualified tax professional.

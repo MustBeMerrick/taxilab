@@ -1,0 +1,12 @@
+{
+  "_source": "IRS Publication 15 (Circular E), Employer's Tax Guide, for use in 2026, page 2 ('What's New: Social security and Medicare taxes for 2026'). Catalog Number 10000W, Dec 15, 2025.",
+  "taxYear": 2026,
+  "oasdi": {
+    "wageBase": 184500,
+    "employeeRate": 0.062
+  },
+  "medicare": {
+    "employeeRate": 0.0145,
+    "wageBase": null
+  }
+}

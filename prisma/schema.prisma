@@ -1,0 +1,124 @@
+// Prisma schema for TaxiLab.
+//
+// Note: SQLite has no native arbitrary-precision Decimal column type, so all
+// money fields are stored as Float (dollars, fractional cents). Layer 2/3
+// code rounds to the cent when producing final numbers.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Earner {
+  id        Int         @id @default(autoincrement())
+  name      String
+  paychecks Paycheck[]
+  w4Config  W4Config?
+  de4Config DE4Config?
+}
+
+// Take-home pay isn't stored: it's gross minus federalWH/stateWH/oasdi/
+// medicare/caSdi/hsaPreTax/nonHsaPreTax (gtli and employerHsa don't reduce
+// take-home -- gtli is imputed income and employerHsa is employer-paid),
+// derived on the fly wherever it's displayed.
+model Paycheck {
+  id           Int      @id @default(autoincrement())
+  earnerId     Int
+  earner       Earner   @relation(fields: [earnerId], references: [id], onDelete: Cascade)
+  payDate      DateTime
+  gross        Float
+  federalWH    Float
+  stateWH      Float // CA
+  oasdi        Float
+  medicare     Float
+  caSdi        Float
+  hsaPreTax    Float
+  nonHsaPreTax Float // other pre-tax deductions (incl. 401k)
+  gtli         Float // group term life imputed income
+  employerHsa  Float
+  paidOut      Boolean  @default(false)
+  notes        String?
+  updatedAt    DateTime @updatedAt
+
+  @@index([earnerId, payDate])
+}
+
+model W4Config {
+  id                  Int    @id @default(autoincrement())
+  earnerId            Int    @unique
+  earner              Earner @relation(fields: [earnerId], references: [id], onDelete: Cascade)
+  filingStatusOnW4    String // "single" | "mfj" | "hoh"
+  multipleJobsChecked Boolean
+  dependentsCredit    Float // Step 3 dollar amount
+  otherIncome         Float // Step 4a
+  deductionsAdj       Float // Step 4b
+  extraWithholding    Float // Step 4c
+  payFrequency        String // "weekly" | "biweekly" | "semimonthly" | "monthly"
+}
+
+model DE4Config {
+  id                    Int    @id @default(autoincrement())
+  earnerId              Int    @unique
+  earner                Earner @relation(fields: [earnerId], references: [id], onDelete: Cascade)
+  filingStatus          String // "single" | "mfj-one-income" | "mfj-two-incomes" | "hoh"
+  regularAllowances     Int // Line 1
+  estimatedDeductions   Int // Line 2
+  additionalWithholding Float // Line 3
+  payFrequency          String
+}
+
+model TaxProfile {
+  id               Int     @id @default(autoincrement())
+  year             Int     @unique
+  filingStatus     String // "single" | "mfj" | "mfs" | "hoh"
+  dependents       Int
+  useItemized      Boolean
+  itemizedFederal  Float
+  itemizedCA       Float
+  otherJointIncome Float // rental, 1099, etc. not covered elsewhere
+}
+
+model BrokerageAccount {
+  id        Int                 @id @default(autoincrement())
+  name      String
+  kind      String // "taxable" | "traditional-ira" | "roth-ira" | "hsa" | "401k" | "other"
+  estimates BrokerageEstimate[]
+}
+
+model BrokerageEstimate {
+  id        Int              @id @default(autoincrement())
+  accountId Int
+  account   BrokerageAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  year      Int
+
+  stGainsMode   String // "manual" | "ytd-extrapolate"
+  stGainsAnnual Float?
+  stGainsYtd    Float?
+  stGainsAsOf   DateTime?
+
+  ltGainsMode   String
+  ltGainsAnnual Float?
+  ltGainsYtd    Float?
+  ltGainsAsOf   DateTime?
+
+  qualifiedDivMode   String
+  qualifiedDivAnnual Float?
+  qualifiedDivYtd    Float?
+  qualifiedDivAsOf   DateTime?
+
+  ordinaryDivMode   String
+  ordinaryDivAnnual Float?
+  ordinaryDivYtd    Float?
+  ordinaryDivAsOf   DateTime?
+
+  interestMode   String
+  interestAnnual Float?
+  interestYtd    Float?
+  interestAsOf   DateTime?
+
+  @@unique([accountId, year])
+}

@@ -1,0 +1,69 @@
+{
+  "_source": "Derived from California EDD 'California Withholding Schedules for 2026' (Method B) Annual Tax Rate Tables 5/6/7, which are built from the FTB Form 540 statutory rate schedule (the Married table is an exact doubling of the Single table's bracket thresholds, confirming this is the real 540 progressive schedule rather than a withholding-only approximation). Standard deduction and exemption-credit-per-allowance are taken from the same publication's annual-period Tables 3 and 4.",
+  "_provisional": true,
+  "_provisionalNote": "The tax-rate brackets themselves are sourced with high confidence (see above). The standard deduction and per-allowance exemption credit figures are read off the DE-44 withholding tables as the closest available proxy for the true FTB Form 540 personal/dependent exemption credit amounts, since the FTB's own 540 booklet for 2026 was not directly retrievable at build time. Verify against the published 2026 FTB Form 540 instructions before relying on this for real filing decisions. Dependent exemption credit is approximated as 2x the personal exemption credit per historical FTB ratios (~2x in recent years) -- verify exact figure.",
+  "taxYear": 2026,
+  "standardDeduction": {
+    "mfj": 11412,
+    "single": 5706,
+    "mfs": 5706,
+    "hoh": 11412
+  },
+  "personalExemptionCreditPerFiler": 168.30,
+  "dependentExemptionCreditPerDependent": 336.60,
+  "ordinaryBrackets": {
+    "mfj": [
+      { "atLeast": 0, "lessThan": 22158, "base": 0.00, "rate": 0.011 },
+      { "atLeast": 22158, "lessThan": 52528, "base": 243.74, "rate": 0.022 },
+      { "atLeast": 52528, "lessThan": 82904, "base": 911.88, "rate": 0.044 },
+      { "atLeast": 82904, "lessThan": 115084, "base": 2248.42, "rate": 0.066 },
+      { "atLeast": 115084, "lessThan": 145448, "base": 4372.30, "rate": 0.088 },
+      { "atLeast": 145448, "lessThan": 742958, "base": 7044.33, "rate": 0.1023 },
+      { "atLeast": 742958, "lessThan": 891542, "base": 68169.60, "rate": 0.1133 },
+      { "atLeast": 891542, "lessThan": 1000000, "base": 85004.17, "rate": 0.1243 },
+      { "atLeast": 1000000, "lessThan": 1485906, "base": 98485.50, "rate": 0.1353 },
+      { "atLeast": 1485906, "lessThan": null, "base": 164228.58, "rate": 0.1463 }
+    ],
+    "single": [
+      { "atLeast": 0, "lessThan": 11079, "base": 0.00, "rate": 0.011 },
+      { "atLeast": 11079, "lessThan": 26264, "base": 121.87, "rate": 0.022 },
+      { "atLeast": 26264, "lessThan": 41452, "base": 455.94, "rate": 0.044 },
+      { "atLeast": 41452, "lessThan": 57542, "base": 1124.21, "rate": 0.066 },
+      { "atLeast": 57542, "lessThan": 72724, "base": 2186.15, "rate": 0.088 },
+      { "atLeast": 72724, "lessThan": 371479, "base": 3522.17, "rate": 0.1023 },
+      { "atLeast": 371479, "lessThan": 445771, "base": 34084.81, "rate": 0.1133 },
+      { "atLeast": 445771, "lessThan": 742953, "base": 42502.09, "rate": 0.1243 },
+      { "atLeast": 742953, "lessThan": 1000000, "base": 79441.81, "rate": 0.1353 },
+      { "atLeast": 1000000, "lessThan": null, "base": 114220.27, "rate": 0.1463 }
+    ],
+    "mfs": [
+      { "atLeast": 0, "lessThan": 11079, "base": 0.00, "rate": 0.011 },
+      { "atLeast": 11079, "lessThan": 26264, "base": 121.87, "rate": 0.022 },
+      { "atLeast": 26264, "lessThan": 41452, "base": 455.94, "rate": 0.044 },
+      { "atLeast": 41452, "lessThan": 57542, "base": 1124.21, "rate": 0.066 },
+      { "atLeast": 57542, "lessThan": 72724, "base": 2186.15, "rate": 0.088 },
+      { "atLeast": 72724, "lessThan": 371479, "base": 3522.17, "rate": 0.1023 },
+      { "atLeast": 371479, "lessThan": 445771, "base": 34084.81, "rate": 0.1133 },
+      { "atLeast": 445771, "lessThan": 742953, "base": 42502.09, "rate": 0.1243 },
+      { "atLeast": 742953, "lessThan": 1000000, "base": 79441.81, "rate": 0.1353 },
+      { "atLeast": 1000000, "lessThan": null, "base": 114220.27, "rate": 0.1463 }
+    ],
+    "hoh": [
+      { "atLeast": 0, "lessThan": 22173, "base": 0.00, "rate": 0.011 },
+      { "atLeast": 22173, "lessThan": 52530, "base": 243.90, "rate": 0.022 },
+      { "atLeast": 52530, "lessThan": 67716, "base": 911.75, "rate": 0.044 },
+      { "atLeast": 67716, "lessThan": 83805, "base": 1579.93, "rate": 0.066 },
+      { "atLeast": 83805, "lessThan": 98990, "base": 2641.80, "rate": 0.088 },
+      { "atLeast": 98990, "lessThan": 505208, "base": 3978.08, "rate": 0.1023 },
+      { "atLeast": 505208, "lessThan": 606251, "base": 45534.18, "rate": 0.1133 },
+      { "atLeast": 606251, "lessThan": 1000000, "base": 56982.35, "rate": 0.1243 },
+      { "atLeast": 1000000, "lessThan": 1010417, "base": 105925.35, "rate": 0.1353 },
+      { "atLeast": 1010417, "lessThan": null, "base": 107334.77, "rate": 0.1463 }
+    ]
+  },
+  "mentalHealthServicesTax": {
+    "rate": 0.01,
+    "threshold": 1000000,
+    "_note": "Not doubled for MFJ -- flat $1,000,000 threshold regardless of filing status."
+  }
+}

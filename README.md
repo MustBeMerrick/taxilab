@@ -152,7 +152,7 @@ tax-data/           Versioned IRS & CA tax tables
 data/               SQLite database (gitignored)
 tests/              Unit tests
 scripts/            Utility scripts
-
+```
 
 ## Disclaimer
 
